@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "outDir": "./build",
+    "rootDir": "src"
+  },
+  "include": [
+    "src/**/*",
+    "node_modules/ts-jest/globals.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
