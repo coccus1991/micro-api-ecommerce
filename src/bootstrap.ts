@@ -27,7 +27,7 @@ export async function loadData() {
 
         // read users data from csv file
         await new Promise((resolve, reject) => {
-            fs.createReadStream(env.FILE_PATH + '/users.csv')
+            fs.createReadStream(env.MAE_FILE_PATH + '/users.csv')
                 .pipe(csv())
                 .on('data', (data) => {
                     users.push(data);
@@ -43,7 +43,7 @@ export async function loadData() {
 
         // read items data from csv file
         await new Promise((resolve, reject) => {
-            fs.createReadStream(env.FILE_PATH + '/items.csv')
+            fs.createReadStream(env.MAE_FILE_PATH + '/items.csv')
                 .pipe(csv())
                 .on('error', (error) => reject(error))
                 .on('data', (data) => {
@@ -59,7 +59,7 @@ export async function loadData() {
 
         // read relations order and items from csv file
         await new Promise((resolve, reject) => {
-            fs.createReadStream(env.FILE_PATH + '/orders_items_pivot.csv')
+            fs.createReadStream(env.MAE_FILE_PATH + '/orders_items_pivot.csv')
                 .pipe(csv())
                 .on('error', (error) => reject(error))
                 .on('data', (data) => {
@@ -72,7 +72,7 @@ export async function loadData() {
 
         // read orders data from csv file and create relation with items
         await new Promise((resolve, reject) => {
-            fs.createReadStream(env.FILE_PATH + '/orders.csv')
+            fs.createReadStream(env.MAE_FILE_PATH + '/orders.csv')
                 .pipe(csv())
                 .on('error', (error) => reject(error))
                 .on('data', (data) => {

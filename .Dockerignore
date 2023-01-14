@@ -3,3 +3,5 @@ node_modules
 .vscode
 readme.md
 mock_files
+.gitignore
+.git
