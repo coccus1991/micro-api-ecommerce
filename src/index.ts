@@ -24,12 +24,18 @@ const options: swaggerJsdoc.Options = {
 
 const specs = swaggerJsdoc(options);
 
-async function main() {
-    logger.info('Starting application...');
+(async function () {
+    logger.info(`Starting application...`);
 
     await bootstrap();
 
     const app = express();
+
+    // logging requests
+    app.use((req, res, next) => {
+        logger.info(`Api request: [${req.method}] ${req.url}`);
+        next();
+    });
 
     app.use('/users', UsersRoute);
     app.use('/orders', OrdersRoute);
@@ -44,6 +50,9 @@ async function main() {
     }
 
     app.listen(env.MAE_APP_PORT, () => logger.info('Server is running on port 3000'));
-}
+}());
 
-main();
+process.on('SIGINT', function () {
+    logger.warn('Caught interrupt signal');
+    process.exit();
+});

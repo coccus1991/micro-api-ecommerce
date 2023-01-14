@@ -1,4 +1,5 @@
 import { createLogger, format, transports } from 'winston';
+import {env} from "./env";
 
 export const logger = createLogger({
     format: format.combine(
@@ -9,5 +10,5 @@ export const logger = createLogger({
         format.splat(),
         format.json()
     ),
-    transports: [new transports.Console()]
+    transports: [new transports.Console({ level: env.MAE_LOG_LEVEL })]
 });
