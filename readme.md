@@ -30,3 +30,13 @@ Run `npm test`
 ### Docker
 1. Run `docker build -t micro-api-ecommerce .`
 2. Run `docker run -it -p 3000:3000 micro-api-ecommerce -v ${PWD}/mock_files:/app/csv_files` - replace ${PWD}/mock_files with the path of csv_folder if you dont want to use the mock_files folder
+
+### Authentication
+Authentication has been excluded on purpose. Because in a microservice architecture the authentication is a common service and it is not the responsibility of the microservice to manage the authentication.
+
+Below an example of the authentication architecture on AWS cloud provider. 
+
+Basically we will use cognito as IDP and api gateway as the entry point for the microservice. The api gateway will manage the authentication and the authorization and will forward the request to the microservice.
+
+
+<img src="./docs/images/authentication.jpg">
