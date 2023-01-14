@@ -8,13 +8,16 @@ import {env} from "./services/env";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
+// @ts-ignore
+import packageJson from "../package.json";
+
 const options: swaggerJsdoc.Options = {
     swaggerDefinition: {
         openapi: '3.0.0',
         info: {
-            title: 'Your API title',
-            version: '1.0.0',
-            description: 'A sample API',
+            title: packageJson.name,
+            version: packageJson.version,
+            description: packageJson.description,
         },
         host: `localhost:${env.MAE_APP_PORT}`,
         basePath: '/',
@@ -49,7 +52,7 @@ const specs = swaggerJsdoc(options);
         app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
     }
 
-    app.listen(env.MAE_APP_PORT, () => logger.info('Server is running on port 3000'));
+    app.listen(env.MAE_APP_PORT, () => logger.info(`Server is running on port ${env.MAE_APP_PORT}`));
 }());
 
 process.on('SIGINT', function () {
