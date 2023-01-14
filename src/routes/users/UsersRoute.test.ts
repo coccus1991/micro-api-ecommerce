@@ -29,3 +29,37 @@ describe("GET /users", () => {
         expect(response.body[0]).toHaveProperty("password");
     });
 });
+
+describe('GET /users/:id', () => {
+    let app = express();
+
+    beforeAll(async () => {
+        await bootstrap();
+        app.use('/users', UsersRoute);
+    });
+
+    afterAll(async () => {
+        await AppDataSource.destroy();
+    });
+
+    test('should return a user when the id is valid', async () => {
+        const response = await request(app).get('/users/1');
+
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({
+            "id": 1,
+            "username": "johndoe",
+            "email": "johndoe@example.com",
+            "password": "mypassword"
+        });
+    });
+
+    test('should return a 404 error when the id is not valid', async () => {
+        const response = await request(app).get('/users/1000');
+
+        expect(response.status).toBe(404);
+        expect(response.body).toEqual({
+            "message": "User not found"
+        });
+    });
+});

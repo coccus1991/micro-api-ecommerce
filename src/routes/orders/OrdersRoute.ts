@@ -50,5 +50,40 @@ router.get('/', async (req, res) => {
     res.json(orders);
 });
 
+/**
+ * @swagger
+ * /order/{id}:
+ *  get:
+ *    summary: Retrieve a specific order by id
+ *    tags: [Orders]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: The id of the order
+ *    responses:
+ *      200:
+ *        description: The order object
+ *        content:
+ *          application/json:
+ *           schema:
+ *            $ref: '#/components/schemas/Order'
+ *      404:
+ *        description: Order not found
+ *        content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
+router.get('/:id', async (req, res) => {
+    const order = await AppDataSource.manager.findOne(Order, {where: {id: +req.params.id}, relations: ["items", "user"]});
+
+    if(!order) {
+        return res.status(404).json({message: "Order not found"});
+    }
+
+    res.json(order);
+});
+
 
 export default router;
