@@ -52,7 +52,7 @@ router.get('/', async (req, res) => {
 
 /**
  * @swagger
- * /order/{id}:
+ * /orders/{id}:
  *  get:
  *    summary: Retrieve a specific order by id
  *    tags: [Orders]

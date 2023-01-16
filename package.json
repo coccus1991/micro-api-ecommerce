@@ -1,6 +1,6 @@
 {
   "name": "micro-api-ecommerce",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The project is a simple API for an e-commerce. The purpose of the project is to demonstrate BE skills.",
   "main": "src/index.ts",
   "scripts": {
